@@ -1,0 +1,88 @@
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+  <!-- Sidebar (Navigation) -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Agrismart</h2>
+      <!-- <p>Farmer Dashboard</p> -->
+    </div>
+    <ul class="sidebar-menu">
+      <li><a [routerLink] = "['/profile']">Dashboard</a></li>
+      <li><a [routerLink] = "['/profile/my-farm']">🚜 My Farm</a></li>
+      <!-- <li><a [routerLink]="['/profile/my-wallet']">My Wallet</a></li> -->
+      <li><a [routerLink] = "['/profile/market-trends']">📈 Market Trends</a></li>
+      <li><a href="#">👤 Profile</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Profile Section - Only visible on /profile -->
+    <div *ngIf="!isProfileSubPage">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-pic-container">
+            <img [src]="userImage" alt="User Image" class="profile-pic">
+            <button class="edit-pic-btn" (click)="onEditProfilePic()">
+              <i class="fas fa-camera"></i>
+            </button>
+          </div>
+          <h2>{{ userName }}</h2>
+          <p class="user-role">Farmer</p>
+        </div>
+        <div class="profile-details">
+          <div class="detail-item">
+            <i class="fas fa-envelope detail-icon"></i>
+            <p>Email: {{ userEmail }}</p>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt detail-icon"></i>
+            <p>Location: {{ userLocation }}</p>
+          </div>
+          <button class="edit-profile-btn" (click)="openEditProfileModal()">Edit Profile</button>
+        </div>
+      </div>
+
+      <!-- Farm Overview (Only on Profile) -->
+      <div class="farm-overview">
+        <h3>Farm Overview</h3>
+        <div class="overview-cards">
+          <div class="card">
+            <h4>Active Crops</h4>
+            <p>{{ activeCrops }} Crops</p>
+          </div>
+          <div class="card">
+            <h4>Market Value</h4>
+            <p>${{ marketValue }}</p>
+          </div>
+          <div class="card">
+            <h4>Daily Production</h4>
+            <p>{{ dailyProduction }} Kg</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Farm Section - Only visible on /profile/my-farm -->
+    <!-- <div *ngIf="isFarmPage">
+      <h2>My Farm</h2>
+      <p>Manage your farm details, crops, and monitor your farm's performance.</p>
+      <button (click)="openAddCropModal()">Add New Crop</button>
+      <div class="farm-stats">
+        <h3>Your Crops</h3>
+        <div class="crop-list" *ngFor="let crop of crops">
+          <div class="crop-card">
+            <h4>{{ crop.name }}</h4>
+            <p>Status: {{ crop.status }}</p>
+            <p>Planted: {{ crop.plantingDate | date }}</p>
+            <p>Expected Harvest: {{ crop.harvestDate | date }}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Router Outlet for child components -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

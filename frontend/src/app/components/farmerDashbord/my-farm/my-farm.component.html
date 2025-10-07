@@ -1,0 +1,61 @@
+<div class="farm-products-container">
+  <div class="header-section">
+    <h2>My Farm Products</h2>
+    <button class="add-button" (click)="openAddProductModal()">+ Add Product</button>
+     <button class="wallet-button" (click)="toggleWallet()">
+      💼 My Wallet
+    </button>
+  </div>
+
+  <app-farm-wallet  *ngIf="showWallet" [products]="products" (close)="toggleWallet()"></app-farm-wallet>
+
+  <div class="product-list">
+    <div class="product-card" *ngFor="let product of products">
+      <img [src]="product.image || 'assets/default-product.png'" alt="Product Image" class="product-img" />
+      
+      <div class="product-details">
+        <h3>{{ product.name }}</h3>
+        <p class="category">{{ product.category }}</p>
+        <div class="price-options">
+          <span *ngIf="product.price">1kg: {{ product.price | currency }}</span>
+        </div>
+        <p class="location">Location: {{ product.location }}</p>
+        <p class="phoneNumber">Phone number: {{ product.phoneNumber }}</p>
+      </div>
+
+      <div class="actions">
+        <button class="edit-btn" (click)="editProduct(product)">Edit</button>
+        <button class="delete-btn" (click)="deleteProduct(product.id)">Delete</button>
+        <button *ngIf="!product.isSold" class="sold-btn" (click)="markAsSold(product)">Mark as Sold</button>
+          <span *ngIf="product.isSold" class="sold-label">Sold Out</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Product Modal -->
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h3>Add Product</h3>
+    <form (ngSubmit)="submitProduct()" #productForm="ngForm">
+      <input type="text" placeholder="Product Name" [(ngModel)]="newProduct.name" name="name" required />
+      <input type="number" placeholder="Price (1kg)" [(ngModel)]="newProduct.price" name="price" required />
+      <input type="text" placeholder="Category" [(ngModel)]="newProduct.category" name="category" required />
+      <input type="text" placeholder="Location" [(ngModel)]="newProduct.location" name="location" required />
+      <input type="text" placeholder="Phone number" [(ngModel)]="newProduct.phoneNumber" name="phoneNumber" required />
+      <input type="file" (change)="onImageSelected($event)" />
+      
+      <div class="modal-actions">
+        <button type="submit" [disabled]="!productForm.valid">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <button class="wallet-button" (click)="toggleWallet()">
+  <img src="assets/icons/wallet.svg" alt="Wallet" />
+</button> -->
+
+<!-- <app-farm-wallet  *ngIf="showWallet" [products]="products" (close)="toggleWallet()"></app-farm-wallet> -->
+

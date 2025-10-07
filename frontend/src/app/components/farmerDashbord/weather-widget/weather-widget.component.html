@@ -1,0 +1,35 @@
+<div class="weather-dashboard">
+  <section class="weather-current">
+    <div class="location-info">
+      <h2>Today's Weather in {{ location }}</h2>
+      <p class="date">{{ currentDate }}</p>
+    </div>
+    <div class="current-weather-info">
+      <img [src]="weatherIcon" alt="Weather Icon" class="main-weather-icon" />
+      <div class="temperature-details">
+        <h1>{{ temperature }}°C</h1>
+        <p>{{ condition }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="weather-forecast">
+    <h3>7-Day Weather Forecast</h3>
+    <div class="forecast-grid">
+      <div class="forecast-card" *ngFor="let day of forecast">
+        <p class="forecast-day">{{ day.date }}</p>
+        <img [src]="day.icon" alt="icon" />
+        <p>{{ day.temperature }}°C</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="farming-tips">
+    <h3>Farming Tips</h3>
+    <ul>
+      <li>🌱 Best time to plant maize: Late March to May.</li>
+      <li>🌾 Harvest potatoes before heavy rains begin.</li>
+      <li>💧 Water crops early in the morning during dry days.</li>
+    </ul>
+  </section>
+</div>

@@ -1,0 +1,39 @@
+<div class="wallet-container">
+  <div class="wallet-header">
+    <h2>My Wallet</h2>
+    <!-- <p>Track your earnings from sold farm products</p> -->
+    <button (click)="close.emit()" class="close-btn">&times;</button>
+  </div>
+
+  <div class="wallet-summary">
+    <div class="summary-card">
+      <span class="label">Total Earnings</span>
+      <span class="value">{{ totalEarnings | currency }}</span>
+    </div>
+
+    <div class="summary-card">
+      <span class="label">Products Sold</span>
+      <span class="value">{{ numberOfSales }}</span>
+    </div>
+  </div>
+
+  <div class="wallet-transactions" *ngIf="soldProducts.length > 0">
+    <h3>Recent Sales</h3>
+    <ul>
+      <li *ngFor="let product of soldProducts.slice(-5).reverse()">
+        <div class="sale-info">
+          <span class="product-name">{{ product.name }}</span>
+          <span class="product-amount">{{ product.price | currency }}</span>
+        </div>
+        <div class="sale-meta">
+          <span class="location">{{ product.location }}</span>
+          <span class="time">Just now</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <p *ngIf="soldProducts.length === 0" class="empty-msg">
+    No sales yet. Sell products to see earnings here.
+  </p>
+</div>
