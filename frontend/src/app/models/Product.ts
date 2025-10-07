@@ -1,6 +1,10 @@
-export interface Product{
-    id:number
-    name:string
-    price:number
-    imageUrl:string
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  category: string;
+  location: string;
+  image: string;
+  phoneNumber: number;
+  isSold?: boolean;
 }
